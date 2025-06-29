@@ -26,10 +26,13 @@ router.get("/getuser/:userId", async (req, res) => {
 router.post("/postuser", async (req, res) => {
     const user = new User({
         userId: req.body.userId,
-        name: req.body.name,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         email: req.body.email,
         password: req.body.password,
-        age: req.body.age
+        userType: req.body.userType,
+        address: req.body.address,
+        phoneNumber: req.body.phoneNumber
     });
     try {
         const newUser = await user.save();
@@ -46,9 +49,13 @@ router.put("/putuser/:userId", async (req, res) => {
             return res.status(404).json({ message: "User not found" });
         }
         user.name = req.body.name || user.name;
+        user.firstName = req.body.firstName || user.firstName;
+        user.lastName = req.body.lastName || user.lastName;
         user.email = req.body.email || user.email;
         user.password = req.body.password || user.password;
-        user.age = req.body.age || user.age;
+        user.userType = req.body.userType || user.userType;
+        user.address = req.body.address || user.address;
+        user.phoneNumber = req.body.phoneNumber || user.phoneNumber;
         const updatedUser = await user.save();
         res.json(updatedUser);
     } catch (err) {

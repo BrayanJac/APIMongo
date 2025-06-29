@@ -27,9 +27,9 @@ router.post("/postproduct", async (req, res) => {
     const product = new Product({
         productId: req.body.productId,
         name: req.body.name,
+        description: req.body.description,
         price: req.body.price,
-        categoryId: req.body.categoryId,
-        description: req.body.description
+        stock: req.body.stock        
     });
     try {
         const newProduct = await product.save();
@@ -46,9 +46,9 @@ router.put("/putproduct/:productId", async (req, res) => {
             return res.status(404).json({ message: "Product not found" });
         }
         product.name = req.body.name || product.name;
-        product.price = req.body.price || product.price;
-        product.categoryId = req.body.categoryId || product.categoryId;
-        product.description = req.body.description || product.description;
+        product.description = req.body.description || product.description,
+        product.price = req.body.price || product.price,
+        product.stock = req.body.stock || product.stock;
         const updatedProduct = await product.save();
         res.json(updatedProduct);
     } catch (err) {
