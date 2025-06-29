@@ -48,7 +48,6 @@ router.put("/putuser/:userId", async (req, res) => {
         if (user == null) {
             return res.status(404).json({ message: "User not found" });
         }
-        user.name = req.body.name || user.name;
         user.firstName = req.body.firstName || user.firstName;
         user.lastName = req.body.lastName || user.lastName;
         user.email = req.body.email || user.email;
